@@ -1,5 +1,5 @@
 //! The Fast Fourier Transform (FFT) and Number Theoretic Transform (NTT)
-use super::num::{CommonField, Complex, PI};
+use super::num::{CommonField, Complex, PI,COMMON_PRIME};
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
 // We can delete this struct once f64::reverse_bits() stabilizes.
@@ -106,7 +106,7 @@ impl FFT for i64 {
     }
 
     fn extract(f: Self::F) -> Self {
-        f.val
+        if f.val > COMMON_PRIME / 2 { f.val - COMMON_PRIME } else { f.val }
     }
 }
 
